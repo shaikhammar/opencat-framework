@@ -4,4 +4,6 @@ composer.lock
 .phpunit.cache/
 *.skl
 PHP-vs-NodeJS-Parsing-Decision.docx
-.worktrees/
+/.worktrees/
+/packages/*/vendor/
+/packages/*/composer.lock

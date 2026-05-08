@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>OpenCAT — Mockups</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; font-family: 'Inter', system-ui, sans-serif; background: #f0eee9; }
+    *, *::before, *::after { box-sizing: border-box; }
+    [dir="rtl"] { font-family: 'Noto Naskh Arabic', 'Inter', sans-serif; }
+    /* hide scrollbars inside artboards (canvas already does this, but reinforce) */
+    .oc-frame::-webkit-scrollbar { display: none; }
+    .oc-frame { scrollbar-width: none; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="editor.jsx"></script>
+  <script type="text/babel" src="dashboard.jsx"></script>
+  <script type="text/babel" src="wizard.jsx"></script>
+  <script type="text/babel" src="settings.jsx"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState } = React;
+
+    // Wrap an artboard frame so its inner shadow/scroll is contained.
+    function Frame({ w, h, children }) {
+      return (
+        <div className="oc-frame" style={{ width: w, height: h, background: '#fff', overflow: 'hidden', position: 'relative' }}>
+          {children}
+        </div>
+      );
+    }
+
+    function App() {
+      // Editor frames are larger to convey density
+      const EDITOR_W = 1480, EDITOR_H = 900;
+      const APP_W = 1280, APP_H = 860;
+      const WIZ_W = 1100, WIZ_H = 820;
+      const SETTINGS_W = 1280, SETTINGS_H = 860;
+
+      return (
+        <DesignCanvas>
+          <DCSection
+            id="editor"
+            title="Translation Editor"
+            subtitle="The data-dense core of OpenCAT — segment table + side panel. Per-cell direction handles RTL languages independently."
+          >
+            <DCArtboard id="ed-ltr-rtl" label="A · LTR → RTL  (EN → UR)" width={EDITOR_W} height={EDITOR_H}>
+              <Frame w={EDITOR_W} h={EDITOR_H}><Editor variant="ltr-rtl"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="ed-rtl-ltr" label="B · RTL → LTR  (AR → EN, back-translation)" width={EDITOR_W} height={EDITOR_H}>
+              <Frame w={EDITOR_W} h={EDITOR_H}><Editor variant="rtl-ltr"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="ed-qa" label="C · QA panel active" width={EDITOR_W} height={EDITOR_H}>
+              <Frame w={EDITOR_W} h={EDITOR_H}><Editor variant="qa-panel"/></Frame>
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection
+            id="dashboard"
+            title="Dashboard & Project Overview"
+            subtitle="Home for the freelance translator — projects grid, progress at a glance, next-action chips."
+          >
+            <DCArtboard id="dash-projects" label="A · Dashboard with projects" width={APP_W} height={APP_H}>
+              <Frame w={APP_W} h={APP_H}><Dashboard variant="projects"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="dash-empty" label="B · Empty state (new user)" width={APP_W} height={APP_H}>
+              <Frame w={APP_W} h={APP_H}><Dashboard variant="empty"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="dash-overview" label="C · Project overview" width={APP_W} height={APP_H}>
+              <Frame w={APP_W} h={APP_H}><Dashboard variant="project-overview"/></Frame>
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection
+            id="wizard"
+            title="Project Creation Wizard"
+            subtitle="Three-step guided flow. One decision per step, sidebar visible, no modal overlay."
+          >
+            <DCArtboard id="wiz-1" label="Step 1 · Project details" width={WIZ_W} height={WIZ_H}>
+              <Frame w={WIZ_W} h={WIZ_H}><Wizard step={1}/></Frame>
+            </DCArtboard>
+            <DCArtboard id="wiz-2" label="Step 2 · Translation memory" width={WIZ_W} height={WIZ_H}>
+              <Frame w={WIZ_W} h={WIZ_H}><Wizard step={2}/></Frame>
+            </DCArtboard>
+            <DCArtboard id="wiz-3" label="Step 3 · Upload files" width={WIZ_W} height={WIZ_H}>
+              <Frame w={WIZ_W} h={WIZ_H}><Wizard step={3}/></Frame>
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection
+            id="settings"
+            title="Settings"
+            subtitle="Single-page settings, three tabs. Functional and dense — clarity over visual flair."
+          >
+            <DCArtboard id="set-profile" label="A · Profile" width={SETTINGS_W} height={SETTINGS_H}>
+              <Frame w={SETTINGS_W} h={SETTINGS_H}><Settings tab="profile"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="set-mt" label="B · Machine Translation" width={SETTINGS_W} height={SETTINGS_H}>
+              <Frame w={SETTINGS_W} h={SETTINGS_H}><Settings tab="mt"/></Frame>
+            </DCArtboard>
+            <DCArtboard id="set-qa" label="C · QA Defaults" width={SETTINGS_W} height={SETTINGS_H}>
+              <Frame w={SETTINGS_W} h={SETTINGS_H}><Settings tab="qa"/></Frame>
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+
+    // Wait for all Babel-compiled scripts to register globals.
+    function start() {
+      if (!window.Editor || !window.Dashboard || !window.Wizard || !window.Settings || !window.DesignCanvas) {
+        return setTimeout(start, 30);
+      }
+      ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    }
+    start();
+  </script>
+</body>
+</html>

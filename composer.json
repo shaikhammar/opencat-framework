@@ -1,0 +1,36 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "opencat/opencat-framework",
+    "description": "OpenCAT Framework monorepo — modular PHP packages for building CAT tools",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0"
+    },
+    "repositories": [
+        {"type": "path", "url": "packages/core"},
+        {"type": "path", "url": "packages/srx"},
+        {"type": "path", "url": "packages/segmentation"},
+        {"type": "path", "url": "packages/filter-plaintext"},
+        {"type": "path", "url": "packages/filter-html"},
+        {"type": "path", "url": "packages/filter-docx"},
+        {"type": "path", "url": "packages/filter-pptx"},
+        {"type": "path", "url": "packages/filter-xlsx"},
+        {"type": "path", "url": "packages/filter-po"},
+        {"type": "path", "url": "packages/filter-xml"},
+        {"type": "path", "url": "packages/xliff"},
+        {"type": "path", "url": "packages/tmx"},
+        {"type": "path", "url": "packages/translation-memory"},
+        {"type": "path", "url": "packages/terminology"},
+        {"type": "path", "url": "packages/mt"},
+        {"type": "path", "url": "packages/qa"},
+        {"type": "path", "url": "packages/project"},
+        {"type": "path", "url": "packages/workflow"}
+    ],
+    "config": {
+        "sort-packages": true
+    }
+}

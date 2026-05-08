@@ -1,0 +1,68 @@
+name: Split packages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  packages_split:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - local_path: 'packages/core'
+            split_repository: 'opencat-core'
+          - local_path: 'packages/srx'
+            split_repository: 'opencat-srx'
+          - local_path: 'packages/segmentation'
+            split_repository: 'opencat-segmentation'
+          - local_path: 'packages/filter-plaintext'
+            split_repository: 'opencat-filter-plaintext'
+          - local_path: 'packages/filter-html'
+            split_repository: 'opencat-filter-html'
+          - local_path: 'packages/filter-docx'
+            split_repository: 'opencat-filter-docx'
+          - local_path: 'packages/filter-pptx'
+            split_repository: 'opencat-filter-pptx'
+          - local_path: 'packages/filter-xlsx'
+            split_repository: 'opencat-filter-xlsx'
+          - local_path: 'packages/filter-po'
+            split_repository: 'opencat-filter-po'
+          - local_path: 'packages/filter-xml'
+            split_repository: 'opencat-filter-xml'
+          - local_path: 'packages/xliff'
+            split_repository: 'opencat-xliff'
+          - local_path: 'packages/tmx'
+            split_repository: 'opencat-tmx'
+          - local_path: 'packages/translation-memory'
+            split_repository: 'opencat-translation-memory'
+          - local_path: 'packages/terminology'
+            split_repository: 'opencat-terminology'
+          - local_path: 'packages/mt'
+            split_repository: 'opencat-mt'
+          - local_path: 'packages/qa'
+            split_repository: 'opencat-qa'
+          - local_path: 'packages/project'
+            split_repository: 'opencat-project'
+          - local_path: 'packages/workflow'
+            split_repository: 'opencat-workflow'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: symplify/monorepo-split-github-action@v2.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.MONOREPO_SPLIT_TOKEN }}
+        with:
+          package_directory: '${{ matrix.package.local_path }}'
+          repository_organization: 'shaikhammar'
+          repository_name: '${{ matrix.package.split_repository }}'
+          user_name: 'github-actions'
+          user_email: 'action@github.com'
