@@ -2,6 +2,7 @@
     "name": "opencat/translation-memory",
     "description": "SQLite-backed translation memory with fuzzy matching for the OpenCAT Framework",
     "type": "library",
+    "license": "MIT",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",

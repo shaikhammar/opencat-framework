@@ -2,6 +2,7 @@
     "name": "opencat/filter-po",
     "description": "GNU gettext PO file filter for the OpenCAT Framework",
     "type": "library",
+    "license": "MIT",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
