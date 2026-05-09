@@ -24,6 +24,10 @@ Laravel dependency in core.
 
 
 
+\## Skills
+
+\- `opencat-versioning-check` — MUST activate before every `git push` or `gh pr create` in this repo. Verifies all 18 packages are on the correct lockstep version, no `*` constraints exist, and breaking changes bump all packages together.
+
 \## Rules for Claude
 
 \- Do NOT suggest packages without verifying they exist on Packagist
