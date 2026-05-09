@@ -1,6 +1,6 @@
 {
-    "name": "catframework/tmx",
-    "description": "TMX 1.4b parser and writer for the CAT Framework",
+    "name": "opencat/tmx",
+    "description": "TMX 1.4b parser and writer for the OpenCAT Framework",
     "type": "library",
     "version": "0.1.0",
     "require": {
@@ -8,19 +8,19 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "ext-xmlreader": "*",
-        "catframework/core": "^0.1"
+        "opencat/core": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\Tmx\\": "src/"
+            "OpenCat\\Tmx\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\Tmx\\Tests\\": "tests/"
+            "OpenCat\\Tmx\\Tests\\": "tests/"
         }
     },
     "repositories": [

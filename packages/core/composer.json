@@ -1,6 +1,6 @@
 {
-    "name": "catframework/core",
-    "description": "Shared data models and contract interfaces for the CAT Framework",
+    "name": "opencat/core",
+    "description": "Shared data models and contract interfaces for the OpenCAT Framework",
     "type": "library",
     "license": "MIT",
     "version": "0.1.0",
@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\Core\\": "src/"
+            "OpenCat\\Core\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\Core\\Tests\\": "tests/"
+            "OpenCat\\Core\\Tests\\": "tests/"
         }
     },
     "config": {

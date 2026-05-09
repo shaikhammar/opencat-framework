@@ -1,6 +1,6 @@
 {
-    "name": "catframework/translation-memory",
-    "description": "SQLite-backed translation memory with fuzzy matching for the CAT Framework",
+    "name": "opencat/translation-memory",
+    "description": "SQLite-backed translation memory with fuzzy matching for the OpenCAT Framework",
     "type": "library",
     "version": "0.1.0",
     "require": {
@@ -9,8 +9,8 @@
         "ext-pdo_sqlite": "*",
         "ext-intl": "*",
         "ext-mbstring": "*",
-        "catframework/core": "^0.1",
-        "catframework/tmx": "^0.1"
+        "opencat/core": "^0.1",
+        "opencat/tmx": "^0.1"
     },
     "suggest": {
         "ext-pdo_pgsql": "Required for PostgresTranslationMemory — also needs pg_trgm extension enabled in the database"
@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\TranslationMemory\\": "src/"
+            "OpenCat\\TranslationMemory\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\TranslationMemory\\Tests\\": "tests/"
+            "OpenCat\\TranslationMemory\\Tests\\": "tests/"
         }
     },
     "repositories": [

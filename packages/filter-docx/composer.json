@@ -1,11 +1,11 @@
 {
-    "name": "catframework/filter-docx",
-    "description": "DOCX (.docx) file filter for the CAT Framework",
+    "name": "opencat/filter-docx",
+    "description": "DOCX (.docx) file filter for the OpenCAT Framework",
     "type": "library",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
-        "catframework/core": "^0.1",
+        "opencat/core": "^0.1",
         "ext-zip": "*",
         "ext-dom": "*",
         "ext-libxml": "*"
@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\FilterDocx\\": "src/"
+            "OpenCat\\FilterDocx\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\FilterDocx\\Tests\\": "tests/"
+            "OpenCat\\FilterDocx\\Tests\\": "tests/"
         }
     },
     "repositories": [

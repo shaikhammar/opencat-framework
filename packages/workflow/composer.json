@@ -1,32 +1,32 @@
 {
-    "name": "catframework/workflow",
-    "description": "Pipeline orchestration for the CAT Framework — wires filter, segmentation, TM, MT, QA, and XLIFF into a single WorkflowRunner",
+    "name": "opencat/workflow",
+    "description": "Pipeline orchestration for the OpenCAT Framework — wires filter, segmentation, TM, MT, QA, and XLIFF into a single WorkflowRunner",
     "type": "library",
     "license": "MIT",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
-        "catframework/core": "^0.1",
-        "catframework/mt": "^0.1",
-        "catframework/project": "^0.1",
-        "catframework/qa": "^0.1",
-        "catframework/segmentation": "^0.1",
-        "catframework/terminology": "^0.1",
-        "catframework/translation-memory": "^0.1",
-        "catframework/xliff": "^0.1"
+        "opencat/core": "^0.1",
+        "opencat/mt": "^0.1",
+        "opencat/project": "^0.1",
+        "opencat/qa": "^0.1",
+        "opencat/segmentation": "^0.1",
+        "opencat/terminology": "^0.1",
+        "opencat/translation-memory": "^0.1",
+        "opencat/xliff": "^0.1"
     },
     "require-dev": {
-        "catframework/filter-plaintext": "^0.1",
+        "opencat/filter-plaintext": "^0.1",
         "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\Workflow\\": "src/"
+            "OpenCat\\Workflow\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\Workflow\\Tests\\": "tests/"
+            "OpenCat\\Workflow\\Tests\\": "tests/"
         }
     },
     "repositories": [

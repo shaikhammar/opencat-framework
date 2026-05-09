@@ -1,13 +1,13 @@
 {
-    "name": "catframework/project",
-    "description": "Project manifest and catpack archive format for the CAT Framework",
+    "name": "opencat/project",
+    "description": "Project manifest and catpack archive format for the OpenCAT Framework",
     "type": "library",
     "license": "MIT",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
         "ext-zip": "*",
-        "catframework/core": "^0.1"
+        "opencat/core": "^0.1"
     },
     "suggest": {
         "ext-pdo_pgsql": "Required by PostgresSegmentStore and DatabaseSkeletonStore when targeting PostgreSQL"
@@ -17,12 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\Project\\": "src/"
+            "OpenCat\\Project\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\Project\\Tests\\": "tests/"
+            "OpenCat\\Project\\Tests\\": "tests/"
         }
     },
     "repositories": [

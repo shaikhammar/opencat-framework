@@ -1,25 +1,25 @@
 {
-    "name": "catframework/segmentation",
-    "description": "SRX-based sentence segmentation engine for the CAT Framework",
+    "name": "opencat/segmentation",
+    "description": "SRX-based sentence segmentation engine for the OpenCAT Framework",
     "type": "library",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
         "ext-mbstring": "*",
-        "catframework/core": "^0.1",
-        "catframework/srx": "^0.1"
+        "opencat/core": "^0.1",
+        "opencat/srx": "^0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\Segmentation\\": "src/"
+            "OpenCat\\Segmentation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\Segmentation\\Tests\\": "tests/"
+            "OpenCat\\Segmentation\\Tests\\": "tests/"
         }
     },
     "repositories": [

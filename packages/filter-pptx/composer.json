@@ -1,12 +1,12 @@
 {
-    "name": "catframework/filter-pptx",
-    "description": "PowerPoint (.pptx) file filter for the CAT Framework",
+    "name": "opencat/filter-pptx",
+    "description": "PowerPoint (.pptx) file filter for the OpenCAT Framework",
     "type": "library",
     "license": "MIT",
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
-        "catframework/core": "^0.1",
+        "opencat/core": "^0.1",
         "ext-zip": "*",
         "ext-dom": "*",
         "ext-libxml": "*"
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CatFramework\\FilterPptx\\": "src/"
+            "OpenCat\\FilterPptx\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CatFramework\\FilterPptx\\Tests\\": "tests/"
+            "OpenCat\\FilterPptx\\Tests\\": "tests/"
         }
     },
     "repositories": [
