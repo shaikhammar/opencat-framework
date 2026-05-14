@@ -170,7 +170,7 @@ Most CAT tools (Trados, memoQ) use proprietary bilingual formats internally (SDL
 
 1. **Use XML entity escaping (not CDATA) for InlineCode.data inside XLIFF `<bpt>`/`<ept>`/`<ph>`.** CDATA is fragile (can't nest, `]]>` issue). Entity escaping is verbose but universally safe and most likely to survive round-tripping through other tools.
 
-2. **Store `displayText` in a custom namespaced attribute: `<bpt id="1" catfw:equiv-text="&lt;b&gt;">`.** Define a namespace `xmlns:catfw="urn:catframework"` on the XLIFF root. Other tools will either preserve unknown namespaced attributes (most do) or strip them (acceptable, displayText is regenerable).
+2. **Store `displayText` in a custom namespaced attribute: `<bpt id="1" catfw:equiv-text="&lt;b&gt;">`.** Define a namespace `xmlns:catfw="urn:opencat"` on the XLIFF root. Other tools will either preserve unknown namespaced attributes (most do) or strip them (acceptable, displayText is regenerable).
 
 3. **Store isolated codes as `<it>` per XLIFF 1.2 spec.** Accept that compatibility with other tools is imperfect for segmented files with spanning codes. This is a known limitation of XLIFF 1.2 that XLIFF 2.0 fixes. Document it.
 

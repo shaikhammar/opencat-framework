@@ -8,39 +8,39 @@ An open-source, modular PHP framework for building computer-assisted translation
 
 | Package | Description |
 |---|---|
-| [`catframework/core`](packages/core) | Shared data models, contracts, and enums |
-| [`catframework/srx`](packages/srx) | SRX 2.0 segmentation rule parser |
-| [`catframework/segmentation`](packages/segmentation) | SRX-based sentence segmentation engine |
-| [`catframework/filter-plaintext`](packages/filter-plaintext) | Plain text file filter (`.txt`) |
-| [`catframework/filter-html`](packages/filter-html) | HTML file filter (`.html`, `.htm`) |
-| [`catframework/xliff`](packages/xliff) | XLIFF 1.2 writer and reader |
+| [`opencat/core`](packages/core) | Shared data models, contracts, and enums |
+| [`opencat/srx`](packages/srx) | SRX 2.0 segmentation rule parser |
+| [`opencat/segmentation`](packages/segmentation) | SRX-based sentence segmentation engine |
+| [`opencat/filter-plaintext`](packages/filter-plaintext) | Plain text file filter (`.txt`) |
+| [`opencat/filter-html`](packages/filter-html) | HTML file filter (`.html`, `.htm`) |
+| [`opencat/xliff`](packages/xliff) | XLIFF 1.2 writer and reader |
 
 ### Phase 2 — TM, DOCX, QA, Terminology
 
 | Package | Description |
 |---|---|
-| [`catframework/tmx`](packages/tmx) | TMX 1.4b parser and writer |
-| [`catframework/translation-memory`](packages/translation-memory) | SQLite translation memory with exact and fuzzy matching |
-| [`catframework/filter-docx`](packages/filter-docx) | DOCX file filter (`.docx`) with run merging and inline code preservation |
-| [`catframework/qa`](packages/qa) | Per-segment quality checks (tags, numbers, whitespace, empty translations) |
-| [`catframework/terminology`](packages/terminology) | TBX v2 import and term recognition with SQLite backend |
+| [`opencat/tmx`](packages/tmx) | TMX 1.4b parser and writer |
+| [`opencat/translation-memory`](packages/translation-memory) | SQLite translation memory with exact and fuzzy matching |
+| [`opencat/filter-docx`](packages/filter-docx) | DOCX file filter (`.docx`) with run merging and inline code preservation |
+| [`opencat/qa`](packages/qa) | Per-segment quality checks (tags, numbers, whitespace, empty translations) |
+| [`opencat/terminology`](packages/terminology) | TBX v2 import and term recognition with SQLite backend |
 
 ### Phase 3 — MT, Office filters, Cross-segment QA
 
 | Package | Description |
 |---|---|
-| [`catframework/mt`](packages/mt) | Machine translation adapters for DeepL and Google Translate (PSR-18 HTTP client injected) |
-| [`catframework/filter-xlsx`](packages/filter-xlsx) | Excel file filter (`.xlsx`) with shared-strings deduplication and cell-type awareness |
-| [`catframework/filter-pptx`](packages/filter-pptx) | PowerPoint file filter (`.pptx`) — slide body and speaker notes only, DrawingML-safe |
-| `catframework/qa` _(extended)_ | `SegmentConsistencyCheck` — cross-segment QA: flags identical source segments with divergent translations |
+| [`opencat/mt`](packages/mt) | Machine translation adapters for DeepL and Google Translate (PSR-18 HTTP client injected) |
+| [`opencat/filter-xlsx`](packages/filter-xlsx) | Excel file filter (`.xlsx`) with shared-strings deduplication and cell-type awareness |
+| [`opencat/filter-pptx`](packages/filter-pptx) | PowerPoint file filter (`.pptx`) — slide body and speaker notes only, DrawingML-safe |
+| `opencat/qa` _(extended)_ | `SegmentConsistencyCheck` — cross-segment QA: flags identical source segments with divergent translations |
 
 ### Phase 4 — Project, Workflow, API Service
 
 | Package / Project | Description |
 |---|---|
-| [`catframework/project`](packages/project) | Project manifest (`catproject.json`) and portable `.catpack` archive bundling source, TM, and glossary |
-| [`catframework/workflow`](packages/workflow) | End-to-end translation workflow orchestrator: extract → segment → TM → MT → QA in one call |
-| [`cat-framework-api`](https://github.com/catframework/cat-framework-api) _(separate repo)_ | Laravel REST API exposing all framework capabilities over HTTP — usable by any tech stack |
+| [`opencat/project`](packages/project) | Project manifest (`catproject.json`) and portable `.catpack` archive bundling source, TM, and glossary |
+| [`opencat/workflow`](packages/workflow) | End-to-end translation workflow orchestrator: extract → segment → TM → MT → QA in one call |
+| [`opencat-api`](https://github.com/opencat/opencat-api) _(separate repo)_ | Laravel REST API exposing all framework capabilities over HTTP — usable by any tech stack |
 
 ## Requirements
 
@@ -88,7 +88,7 @@ XliffReader::read()  →  BilingualDocument  →  FileFilter::rebuild()
 ### 1. Extract a plain text file
 
 ```php
-use CatFramework\FilterPlaintext\PlainTextFilter;
+use OpenCat\FilterPlaintext\PlainTextFilter;
 
 $filter = new PlainTextFilter();
 $doc = $filter->extract('article.txt', 'en-US', 'fr-FR');
@@ -101,7 +101,7 @@ foreach ($doc->getSegmentPairs() as $pair) {
 ### 2. Segment with SRX rules
 
 ```php
-use CatFramework\Segmentation\SrxSegmentationEngine;
+use OpenCat\Segmentation\SrxSegmentationEngine;
 
 $engine = new SrxSegmentationEngine();
 // Auto-loads bundled SRX rules for English, Hindi, Urdu, Arabic, French, German, Spanish, CJK
@@ -114,7 +114,7 @@ foreach ($doc->getSegmentPairs() as $pair) {
 ### 3. Look up translation memory
 
 ```php
-use CatFramework\TranslationMemory\SqliteTranslationMemory;
+use OpenCat\TranslationMemory\SqliteTranslationMemory;
 
 $tm = new SqliteTranslationMemory('project.db');
 $tm->import('my-memory.tmx');
@@ -130,7 +130,7 @@ foreach ($doc->getSegmentPairs() as $pair) {
 ### 4. Recognise terminology
 
 ```php
-use CatFramework\Terminology\Provider\SqliteTerminologyProvider;
+use OpenCat\Terminology\Provider\SqliteTerminologyProvider;
 
 $terms = new SqliteTerminologyProvider('terms.db');
 $terms->import('glossary.tbx');  // TBX v2
@@ -144,10 +144,10 @@ foreach ($matches as $match) {
 ### 5. Run QA checks
 
 ```php
-use CatFramework\Qa\QualityRunner;
-use CatFramework\Qa\Check\TagConsistencyCheck;
-use CatFramework\Qa\Check\NumberConsistencyCheck;
-use CatFramework\Qa\Check\EmptyTranslationCheck;
+use OpenCat\Qa\QualityRunner;
+use OpenCat\Qa\Check\TagConsistencyCheck;
+use OpenCat\Qa\Check\NumberConsistencyCheck;
+use OpenCat\Qa\Check\EmptyTranslationCheck;
 
 $runner = new QualityRunner();
 $runner->register(new TagConsistencyCheck());
@@ -163,8 +163,8 @@ foreach ($issues as $issue) {
 ### 6. Export to XLIFF 1.2 and rebuild
 
 ```php
-use CatFramework\Xliff\XliffWriter;
-use CatFramework\Xliff\XliffReader;
+use OpenCat\Xliff\XliffWriter;
+use OpenCat\Xliff\XliffReader;
 
 $writer = new XliffWriter();
 $writer->write($doc, 'project.xlf');

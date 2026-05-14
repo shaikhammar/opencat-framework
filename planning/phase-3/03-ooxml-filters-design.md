@@ -1,6 +1,6 @@
 # Phase 3: OOXML Filters Design (XLSX + PPTX)
 
-Detailed design for `catframework/filter-xlsx` and `catframework/filter-pptx`. Read alongside the scope doc. Both packages follow patterns established by `catframework/filter-docx`, so read that implementation first.
+Detailed design for `opencat/filter-xlsx` and `opencat/filter-pptx`. Read alongside the scope doc. Both packages follow patterns established by `opencat/filter-docx`, so read that implementation first.
 
 ---
 
@@ -181,4 +181,4 @@ Both filters are structurally similar to DocxFilter. Before implementing each on
 - Skeleton token generation (`{{SEG:NNN}}` with zero-padded sequential numbering)
 - ZIP copy strategy (use `ext-zip`'s `ZipArchive::open()` + `ZipArchive::getFromName()` / `ZipArchive::addFromString()` pattern)
 
-If the run-merging logic ends up duplicated across DocxFilter, XlsxFilter, and PptxFilter, extract it into a `CatFramework\Core\Util\OoxmlRunMerger` class in `catframework/core`. Do not create a new shared package for this — it is a single utility class. Make this refactor the first task of the filter-xlsx implementation session, before writing new code.
+If the run-merging logic ends up duplicated across DocxFilter, XlsxFilter, and PptxFilter, extract it into a `OpenCat\Core\Util\OoxmlRunMerger` class in `opencat/core`. Do not create a new shared package for this — it is a single utility class. Make this refactor the first task of the filter-xlsx implementation session, before writing new code.

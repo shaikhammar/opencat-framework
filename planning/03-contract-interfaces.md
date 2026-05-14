@@ -1,6 +1,6 @@
 # Contract Interfaces
 
-All interfaces live in `catframework/core`. Namespace: `CatFramework\Core\Contract`.
+All interfaces live in `opencat/core`. Namespace: `OpenCat\Core\Contract`.
 
 Supporting types introduced by these interfaces (not part of the 7 core models but needed for return types) are noted inline.
 
@@ -11,9 +11,9 @@ Supporting types introduced by these interfaces (not part of the 7 core models b
 Extracts translatable content from a source file and rebuilds the file with translations injected.
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
-use CatFramework\Core\Model\BilingualDocument;
+use OpenCat\Core\Model\BilingualDocument;
 
 interface FileFilterInterface
 {
@@ -41,7 +41,7 @@ interface FileFilterInterface
      * in HTML, a line in plaintext). Sentence-level segmentation is
      * the SegmentationEngine's job.
      *
-     * @throws \CatFramework\Core\Exception\FilterException On parse failure.
+     * @throws \OpenCat\Core\Exception\FilterException On parse failure.
      */
     public function extract(
         string $filePath,
@@ -58,7 +58,7 @@ interface FileFilterInterface
      *
      * @param BilingualDocument $document Must have been produced by this filter.
      * @param string $outputPath Where to write the translated file.
-     * @throws \CatFramework\Core\Exception\FilterException On rebuild failure.
+     * @throws \OpenCat\Core\Exception\FilterException On rebuild failure.
      */
     public function rebuild(BilingualDocument $document, string $outputPath): void;
 
@@ -87,9 +87,9 @@ I kept extract and rebuild on the same interface because the filter that created
 Splits paragraph-level text units into sentence-level segments.
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
-use CatFramework\Core\Model\Segment;
+use OpenCat\Core\Model\Segment;
 
 interface SegmentationEngineInterface
 {
@@ -120,7 +120,7 @@ interface SegmentationEngineInterface
      * calls for different languages.
      *
      * @param string $srxFilePath Path to an SRX 2.0 file.
-     * @throws \CatFramework\Core\Exception\SegmentationException On invalid SRX.
+     * @throws \OpenCat\Core\Exception\SegmentationException On invalid SRX.
      */
     public function loadRules(string $srxFilePath): void;
 }
@@ -141,11 +141,11 @@ Input is `Segment` (not `string`) because the segmenter must know where InlineCo
 Stores translation units and retrieves matches against source segments.
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
-use CatFramework\Core\Model\MatchResult;
-use CatFramework\Core\Model\Segment;
-use CatFramework\Core\Model\TranslationUnit;
+use OpenCat\Core\Model\MatchResult;
+use OpenCat\Core\Model\Segment;
+use OpenCat\Core\Model\TranslationUnit;
 
 interface TranslationMemoryInterface
 {
@@ -184,7 +184,7 @@ interface TranslationMemoryInterface
      * Import TUs from a TMX file.
      *
      * @return int Number of TUs imported (including updates to existing entries).
-     * @throws \CatFramework\Core\Exception\TmException On parse or storage failure.
+     * @throws \OpenCat\Core\Exception\TmException On parse or storage failure.
      */
     public function import(string $tmxFilePath): int;
 
@@ -212,7 +212,7 @@ Float comparison is imprecise, but TM scores are inherently imprecise (different
 Recognizes terms in source text and provides approved translations.
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
 interface TerminologyProviderInterface
 {
@@ -254,7 +254,7 @@ interface TerminologyProviderInterface
      * Import terminology from a TBX file.
      *
      * @return int Number of entries imported.
-     * @throws \CatFramework\Core\Exception\TerminologyException On parse failure.
+     * @throws \OpenCat\Core\Exception\TerminologyException On parse failure.
      */
     public function import(string $tbxFilePath): int;
 
@@ -265,7 +265,7 @@ interface TerminologyProviderInterface
 }
 ```
 
-**Supporting types** (defined in `CatFramework\Core\Model`):
+**Supporting types** (defined in `OpenCat\Core\Model`):
 
 ```php
 readonly class TermEntry
@@ -321,10 +321,10 @@ Term recognition is a text operation. Inline codes are irrelevant to whether "ha
 A single QA check. Each check class implements this interface. A QA runner iterates over all registered checks.
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
-use CatFramework\Core\Model\QualityIssue;
-use CatFramework\Core\Model\SegmentPair;
+use OpenCat\Core\Model\QualityIssue;
+use OpenCat\Core\Model\SegmentPair;
 
 interface QualityCheckInterface
 {
@@ -372,9 +372,9 @@ A check knows its own default severity (tag errors are ERROR, double spaces are 
 Adapter for external MT services (DeepL, Google, etc.).
 
 ```php
-namespace CatFramework\Core\Contract;
+namespace OpenCat\Core\Contract;
 
-use CatFramework\Core\Model\Segment;
+use OpenCat\Core\Model\Segment;
 
 interface MachineTranslationInterface
 {
@@ -392,7 +392,7 @@ interface MachineTranslationInterface
      * @param string $sourceLanguage BCP 47 code.
      * @param string $targetLanguage BCP 47 code.
      * @return Segment The machine-translated target segment.
-     * @throws \CatFramework\Core\Exception\MtException On API failure.
+     * @throws \OpenCat\Core\Exception\MtException On API failure.
      */
     public function translate(
         Segment $source,

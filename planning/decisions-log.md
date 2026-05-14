@@ -52,7 +52,7 @@ Decisions locked in during planning phase. Reference these before implementation
 
 **Status:** Accepted
 **Affects:** xliff
-**Decision:** `InlineCode.displayText` is stored as a custom namespaced attribute: `catfw:equiv-text` on `<bpt>`/`<ept>`/`<ph>` elements. XLIFF root declares `xmlns:catfw="urn:catframework"`. Other tools will either preserve unknown namespaced attributes (most do) or strip them (acceptable, displayText is regenerable from the code's data or auto-generated as `{1}`, `{2}`).
+**Decision:** `InlineCode.displayText` is stored as a custom namespaced attribute: `catfw:equiv-text` on `<bpt>`/`<ept>`/`<ph>` elements. XLIFF root declares `xmlns:catfw="urn:opencat"`. Other tools will either preserve unknown namespaced attributes (most do) or strip them (acceptable, displayText is regenerable from the code's data or auto-generated as `{1}`, `{2}`).
 
 ---
 
@@ -148,7 +148,7 @@ Decisions locked in during planning phase. Reference these before implementation
 
 **Status:** Accepted
 **Affects:** mt
-**Decision:** MT adapters accept a `Psr\Http\Client\ClientInterface`, `Psr\Http\Message\RequestFactoryInterface`, and `Psr\Http\Message\StreamFactoryInterface` via constructor injection. The `catframework/mt` package requires `psr/http-client`, `psr/http-factory`, and `psr/http-message` (all interface packages, zero transitive deps). No concrete HTTP client is bundled or auto-discovered. A `suggest` block in `composer.json` points to `guzzlehttp/guzzle` and `symfony/http-client`. Each adapter ships a static `create(string $apiKey, ?ClientInterface $client = null): self` factory that optionally auto-detects a commonly installed client if none is injected, but throws a descriptive `RuntimeException` if no client is available.
+**Decision:** MT adapters accept a `Psr\Http\Client\ClientInterface`, `Psr\Http\Message\RequestFactoryInterface`, and `Psr\Http\Message\StreamFactoryInterface` via constructor injection. The `opencat/mt` package requires `psr/http-client`, `psr/http-factory`, and `psr/http-message` (all interface packages, zero transitive deps). No concrete HTTP client is bundled or auto-discovered. A `suggest` block in `composer.json` points to `guzzlehttp/guzzle` and `symfony/http-client`. Each adapter ships a static `create(string $apiKey, ?ClientInterface $client = null): self` factory that optionally auto-detects a commonly installed client if none is injected, but throws a descriptive `RuntimeException` if no client is available.
 **Rationale:** Keeps the framework dependency-free. Users in Laravel already have Guzzle; Symfony users already have Symfony HTTP Client. Forcing either on the other is hostile.
 
 ---
@@ -184,5 +184,5 @@ Decisions locked in during planning phase. Reference these before implementation
 
 **Status:** Accepted
 **Affects:** filter-pptx
-**Decision:** Extract translatable text from `ppt/slides/slide{N}.xml` and `ppt/notesSlides/notesSlide{N}.xml` only. Skip `ppt/slideMasters/`, `ppt/slideLayouts/`, `ppt/theme/`, and hidden slides (`show="0"` in presentation.xml). Apply the same explicit-only `<a:rPr>` comparison as D9 (no cascade resolution). Use the same run-merging and InlineCode generation logic as DocxFilter. If run-merging logic is duplicated across DocxFilter and PptxFilter, extract it to `CatFramework\Core\Util\OoxmlRunMerger` in `catframework/core` during the filter-xlsx implementation session.
+**Decision:** Extract translatable text from `ppt/slides/slide{N}.xml` and `ppt/notesSlides/notesSlide{N}.xml` only. Skip `ppt/slideMasters/`, `ppt/slideLayouts/`, `ppt/theme/`, and hidden slides (`show="0"` in presentation.xml). Apply the same explicit-only `<a:rPr>` comparison as D9 (no cascade resolution). Use the same run-merging and InlineCode generation logic as DocxFilter. If run-merging logic is duplicated across DocxFilter and PptxFilter, extract it to `OpenCat\Core\Util\OoxmlRunMerger` in `opencat/core` during the filter-xlsx implementation session.
 **Rationale:** Masters and layouts are design templates, not translatable content for a specific presentation. Translating them would propagate changes to all slides sharing that master, which is not what a translator intends. Hidden slides are excluded by default because they may be draft content not intended for translation.

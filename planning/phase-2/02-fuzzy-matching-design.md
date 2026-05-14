@@ -55,7 +55,7 @@ We need to operate at the **grapheme cluster** level, not the byte or code point
 ### Implementation
 
 ```
-Class: CatFramework\TranslationMemory\LevenshteinCalculator
+Class: OpenCat\TranslationMemory\LevenshteinCalculator
 
 Method: distance(string $a, string $b): int
 
@@ -77,7 +77,7 @@ Method: similarity(string $a, string $b): float
 
 `mb_str_split` splits by code points. A Hindi character with a combining vowel sign would be split into two elements, and the Levenshtein algorithm would treat them as separate units. `grapheme_str_split` splits by what the user sees as a single character. This is correct for Hindi, Urdu, Arabic (with diacritics), Korean (with Jamo composition), and emoji (with ZWJ sequences).
 
-`grapheme_str_split` requires `ext-intl`, which is already a dependency of `catframework/core`.
+`grapheme_str_split` requires `ext-intl`, which is already a dependency of `opencat/core`.
 
 ### Performance characteristics
 

@@ -8,16 +8,16 @@ Phase 2 delivered the core CAT features: translation memory, DOCX support, QA, a
 
 | # | Package / Change | Priority | Depends on |
 |---|---|---|---|
-| 1 | `catframework/mt` | High | core |
-| 2 | `catframework/filter-xlsx` | High | core |
-| 3 | `catframework/filter-pptx` | Medium | core |
-| 4 | Extend `catframework/qa` | Medium | core, qa |
+| 1 | `opencat/mt` | High | core |
+| 2 | `opencat/filter-xlsx` | High | core |
+| 3 | `opencat/filter-pptx` | Medium | core |
+| 4 | Extend `opencat/qa` | Medium | core, qa |
 
 ---
 
 ## Build Order and Features
 
-### Step 1: catframework/mt
+### Step 1: opencat/mt
 
 **Machine translation adapter framework plus two concrete adapters. The `MachineTranslationInterface` was already designed in Phase 1. This step implements it.**
 
@@ -58,7 +58,7 @@ Estimated effort: 2–3 sessions.
 
 ---
 
-### Step 2: catframework/filter-xlsx
+### Step 2: opencat/filter-xlsx
 
 **Excel (.xlsx) file filter. Same OOXML ZIP structure as DOCX but a fundamentally different text storage model.**
 
@@ -98,7 +98,7 @@ Estimated effort: 3–4 sessions. Shared strings deduplication and the rich text
 
 ---
 
-### Step 3: catframework/filter-pptx
+### Step 3: opencat/filter-pptx
 
 **PowerPoint (.pptx) file filter. Same OOXML ZIP structure, uses DrawingML namespace instead of WordprocessingML.**
 
@@ -139,9 +139,9 @@ Estimated effort: 2–3 sessions. Heavily leverages the patterns already establi
 
 ---
 
-### Step 4: Cross-segment consistency check (extend catframework/qa)
+### Step 4: Cross-segment consistency check (extend opencat/qa)
 
-**New check class added to the existing `catframework/qa` package. Detects inconsistent translations of the same source segment.**
+**New check class added to the existing `opencat/qa` package. Detects inconsistent translations of the same source segment.**
 
 This requires a new method on `QualityRunner` because the existing `QualityCheckInterface::check()` operates on a single `SegmentPair` and has no visibility into the rest of the document.
 
@@ -174,7 +174,7 @@ Changes:
 - No regex-based custom check patterns.
 - No cross-document consistency (across multiple project files).
 
-**External deps:** none beyond existing `catframework/core`.
+**External deps:** none beyond existing `opencat/core`.
 
 Estimated effort: 1 session.
 

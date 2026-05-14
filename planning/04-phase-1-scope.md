@@ -10,17 +10,17 @@ Goal: the smallest working vertical slice that proves the architecture.
 
 Five packages (plus srx as a sub-deliverable of segmentation):
 
-1. `catframework/core`
-2. `catframework/filter-plaintext`
-3. `catframework/filter-html`
-4. `catframework/segmentation` (includes `catframework/srx`)
-5. `catframework/xliff`
+1. `opencat/core`
+2. `opencat/filter-plaintext`
+3. `opencat/filter-html`
+4. `opencat/segmentation` (includes `opencat/srx`)
+5. `opencat/xliff`
 
 ---
 
 ## Build Order and Features
 
-### Step 1: catframework/core
+### Step 1: opencat/core
 
 **Build first. Everything depends on this.**
 
@@ -39,7 +39,7 @@ Estimated effort: 1-2 sessions (5-10 hours).
 
 ---
 
-### Step 2: catframework/filter-plaintext
+### Step 2: opencat/filter-plaintext
 
 **First filter. Proves the extract/rebuild pipeline with zero InlineCode complexity.**
 
@@ -62,7 +62,7 @@ filter-plaintext extract input.txt → BilingualDocument → manually set target
 
 ---
 
-### Step 3: catframework/filter-html
+### Step 3: opencat/filter-html
 
 **Second filter. Introduces InlineCode handling, which is the core complexity of CAT file filters.**
 
@@ -90,11 +90,11 @@ Milestone: after this step, you can extract a real HTML page, see paragraphs wit
 
 ---
 
-### Step 4: catframework/srx + catframework/segmentation
+### Step 4: opencat/srx + opencat/segmentation
 
 **Adds sentence-level segmentation. Until now, each paragraph was one segment. Now paragraphs get split into sentences.**
 
-#### catframework/srx
+#### opencat/srx
 
 Features:
 
@@ -103,7 +103,7 @@ Features:
 - Language map resolution: given a BCP 47 code like "hi-IN", match against SRX language patterns using regex (e.g., `hi.*` or `.*`).
 - Ship a default SRX file bundled with the package. Rules for: English, Hindi, Urdu, Arabic, French, German, Spanish, Chinese, Japanese. Based on publicly available Unicode CLDR/ICU segmentation data (not copied from any proprietary tool).
 
-#### catframework/segmentation
+#### opencat/segmentation
 
 Features:
 
@@ -127,7 +127,7 @@ Milestone: after this step, the pipeline is: HTML → paragraphs → sentences �
 
 ---
 
-### Step 5: catframework/xliff
+### Step 5: opencat/xliff
 
 **Serialization layer. Without this, BilingualDocument only exists in memory. XLIFF lets you save work, resume later, and exchange with other CAT tools.**
 

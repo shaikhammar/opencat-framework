@@ -1,6 +1,6 @@
 # Core Data Models
 
-All classes live in `catframework/core`. Namespace: `CatFramework\Core\Model` (and `CatFramework\Core\Enum` for enums).
+All classes live in `opencat/core`. Namespace: `OpenCat\Core\Model` (and `OpenCat\Core\Enum` for enums).
 
 No implementation logic is shown. Method bodies are omitted. Only the shape of the data and the signatures of essential accessor methods.
 
@@ -9,7 +9,7 @@ No implementation logic is shown. Method bodies are omitted. Only the shape of t
 ## Supporting Enums
 
 ```php
-namespace CatFramework\Core\Enum;
+namespace OpenCat\Core\Enum;
 
 enum InlineCodeType: string
 {
@@ -73,7 +73,7 @@ enum QualitySeverity: string
 Represents a single formatting tag embedded within translatable text. Filters produce these when extracting text from structured formats (DOCX runs, HTML tags, etc.).
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 readonly class InlineCode
 {
@@ -133,7 +133,7 @@ readonly class InlineCode
 A single translatable text unit. Content is an ordered sequence of plain text strings interleaved with InlineCode objects.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 class Segment
 {
@@ -186,7 +186,7 @@ The target Segment must be editable (translator types translations). The source 
 Links a source segment to its translation. The fundamental unit of work in a CAT tool.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 class SegmentPair
 {
@@ -237,7 +237,7 @@ Reconstruction context is about "where in the file does this pair live," not abo
 The central data structure. A file filter produces one of these from a source file; the translator works on it; the filter consumes it to rebuild the translated file.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 class BilingualDocument
 {
@@ -291,7 +291,7 @@ Progress calculation (counting states across pairs) is trivial and better left t
 A single entry in a translation memory. Represents one source-target pair with metadata. Maps to a TMX `<tu>` element.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 readonly class TranslationUnit
 {
@@ -357,7 +357,7 @@ A TranslationUnit is a historical record. It should not be mutated in place. To 
 Returned by TranslationMemoryInterface::lookup(). One per match candidate.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 readonly class MatchResult
 {
@@ -396,7 +396,7 @@ Professional CAT tools (Trados, memoQ) support cascaded TM lookups: check the pr
 Returned by QualityCheckInterface::check(). One per problem found.
 
 ```php
-namespace CatFramework\Core\Model;
+namespace OpenCat\Core\Model;
 
 readonly class QualityIssue
 {

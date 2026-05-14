@@ -1,13 +1,13 @@
 # Phase 3: MT Adapter Design
 
-Detailed design for `catframework/mt`. Complements the scope doc. Read this before starting the implementation session.
+Detailed design for `opencat/mt`. Complements the scope doc. Read this before starting the implementation session.
 
 ---
 
 ## Package Structure
 
 ```
-catframework/mt/
+opencat/mt/
   src/
     AbstractMtAdapter.php
     NullMtAdapter.php
@@ -34,7 +34,7 @@ The package declares these in `require`:
 ```json
 "require": {
     "php": "^8.2",
-    "catframework/core": "*",
+    "opencat/core": "*",
     "psr/http-client": "^1.0",
     "psr/http-factory": "^1.0",
     "psr/http-message": "^1.1 || ^2.0"

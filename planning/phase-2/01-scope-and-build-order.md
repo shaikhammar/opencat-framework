@@ -10,17 +10,17 @@ Five packages, two of which are high priority:
 
 | # | Package | Priority | Depends on |
 |---|---|---|---|
-| 1 | `catframework/tmx` | High | core |
-| 2 | `catframework/translation-memory` | High | core, tmx |
-| 3 | `catframework/filter-docx` | High | core |
-| 4 | `catframework/qa` | Medium | core |
-| 5 | `catframework/terminology` | Medium | core |
+| 1 | `opencat/tmx` | High | core |
+| 2 | `opencat/translation-memory` | High | core, tmx |
+| 3 | `opencat/filter-docx` | High | core |
+| 4 | `opencat/qa` | Medium | core |
+| 5 | `opencat/terminology` | Medium | core |
 
 ---
 
 ## Build Order and Features
 
-### Step 1: catframework/tmx
+### Step 1: opencat/tmx
 
 **TMX 1.4b parser/writer. Needed before translation-memory can import/export.**
 
@@ -53,7 +53,7 @@ Estimated effort: 1-2 sessions.
 
 ---
 
-### Step 2: catframework/translation-memory
+### Step 2: opencat/translation-memory
 
 **The highest-value Phase 2 package. TM is what makes a CAT tool productive.**
 
@@ -65,7 +65,7 @@ Features:
   - `lookup()`: two-phase matching:
     1. **Exact match:** Normalized plain text comparison. Normalize = trim, collapse whitespace, NFC Unicode normalization via `Normalizer::normalize()`. If exact text match found, additionally verify InlineCode structure. Score: 1.0 (EXACT) if codes match, 0.99 (EXACT_TEXT) if only text matches.
     2. **Fuzzy match:** Character-level Levenshtein distance on plain text. Pre-filter by character count (±30% of source length for default 0.7 threshold). Score: `1.0 - (distance / max(sourceLen, candidateLen))`. Return candidates above `$minScore`, sorted descending.
-  - `import()`: read TMX file via catframework/tmx, store each TU. Return count.
+  - `import()`: read TMX file via opencat/tmx, store each TU. Return count.
   - `export()`: iterate all TUs, write via TmxWriter. Return count.
   - `update lastUsedAt`: when a TU is returned as a match result, update its `last_used_at` timestamp.
   - Index: SQLite index on `source_lang, target_lang, char_count` for fast pre-filtering.
@@ -92,7 +92,7 @@ Estimated effort: 3-4 sessions. Fuzzy matching and the normalization pipeline ar
 
 ---
 
-### Step 3: catframework/filter-docx
+### Step 3: opencat/filter-docx
 
 **The most complex filter. Also the most useful for real translation work.**
 
@@ -133,7 +133,7 @@ Estimated effort: 4-6 sessions. This is the largest single deliverable in Phase 
 
 ---
 
-### Step 4: catframework/qa
+### Step 4: opencat/qa
 
 **Per-pair quality checks. Small package, high value.**
 
@@ -187,7 +187,7 @@ Estimated effort: 2 sessions. Individual checks are small and testable. The Qual
 
 ---
 
-### Step 5: catframework/terminology
+### Step 5: opencat/terminology
 
 **Term recognition and lookup with TBX import.**
 

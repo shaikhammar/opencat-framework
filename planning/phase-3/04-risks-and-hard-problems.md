@@ -54,7 +54,7 @@ None. This must be done correctly from the start. Add a unit test with source te
 
 **What the problem is:**
 
-`catframework/mt` requires `psr/http-client` and `psr/http-factory` but ships no implementation. A user who installs the package and tries to instantiate a `DeepLAdapter` without having a concrete HTTP client gets a runtime failure (no class implements `ClientInterface`) or a Composer warning about missing virtual package implementations.
+`opencat/mt` requires `psr/http-client` and `psr/http-factory` but ships no implementation. A user who installs the package and tries to instantiate a `DeepLAdapter` without having a concrete HTTP client gets a runtime failure (no class implements `ClientInterface`) or a Composer warning about missing virtual package implementations.
 
 This is a DX (developer experience) problem, not a logic problem. But it will cause confusion and issues for users who are not deep in the PSR ecosystem.
 
@@ -71,7 +71,7 @@ The correct solution is documentation, not code. But documentation is often unre
       "symfony/http-client": "PSR-18 HTTP client (use with nyholm/psr7)"
   }
   ```
-- In the package's `README.md`, include a concrete quickstart with `composer require catframework/mt guzzlehttp/guzzle` as the first example. Do not leave the HTTP client setup to imagination.
+- In the package's `README.md`, include a concrete quickstart with `composer require opencat/mt guzzlehttp/guzzle` as the first example. Do not leave the HTTP client setup to imagination.
 - Consider a static factory method on each adapter: `DeepLAdapter::create(string $apiKey): self` that internally checks for a well-known HTTP client class and instantiates it, throwing a helpful `RuntimeException` if none is found. This is an optional convenience, not a required pattern.
 
 **Decision to defer:**
