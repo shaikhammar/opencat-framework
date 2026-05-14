@@ -1,4 +1,4 @@
-\# CAT Framework Project
+\# OpenCAT Framework Project
 
 
 
